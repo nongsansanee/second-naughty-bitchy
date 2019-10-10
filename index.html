@@ -47,6 +47,8 @@
             background: #396;
             position: absolute;
             top: 50%;
+            transform-origin: right;
+            transition: all 0.3s cubic-bezier(0.44, 0.93, 0.58, 1)
         }
 
         .hand {
@@ -66,6 +68,9 @@
         .hand.hour {
             top: 45vh;
         }
+        .notransition{
+             transition: none;
+        }
 
     </style>
 </head>
@@ -77,5 +82,47 @@
             <div class="hand hour"><img src="images/hour.png" class="img-hand"></div>
         </div>
     </div>
+    <script>
+       // setInterval(function(){console.log("hello");},1000);
+        function tikTok(){
+            const now = new Date();
+
+            const secondHand = document.querySelector(".second-hand");
+
+            const rotateDegreesSecondHand = now.getSeconds()*6+90; //+90 เพื่อปรับตำแหน่ง div ที่วางอยู่ แนวนอน
+
+            
+            const minuteHand = document.querySelector(".hand.minute");
+
+            const rotateDegreesMinuteHand = now.getMinutes()*6;
+
+           
+            const hourHand = document.querySelector(".hand.hour");
+
+            const rotateDegreesHourHand = now.getHours()*30;
+
+
+            
+            if(now.getHours()==0) hourHand.classList.add("notransition");
+            else hourHand.classList.remove("notransition");
+            hourHand.style.transform = `rotate(${rotateDegreesHourHand}deg)`;
+
+
+            if(now.getMinutes()==0) minuteHand.classList.add("notransition");
+            else minuteHand.classList.remove("notransition");
+            minuteHand.style.transform = `rotate(${rotateDegreesMinuteHand}deg)`;
+            
+
+            if(now.getSeconds()==0) secondHand.classList.add("notransition");
+            else secondHand.classList.remove("notransition");
+            secondHand.style.transform = `rotate(${rotateDegreesSecondHand}deg)`;
+
+
+            console.log(now.getHours());
+        }
+
+        setInterval(tikTok,1000);
+        
+    </script>
 </body>
 </html>
